@@ -19,7 +19,14 @@
 <!-- this part is very important -->
 
     {% csrf_token %}  <!--for secure post-->
-    {{form}}
+    
+    {{ formset.management_form }}
+    {% for i in formset %}
+    {{i}}
+    <hr>
+
+
+    {% endfor %}
 
     <input type="submit" name="submit" >
 
