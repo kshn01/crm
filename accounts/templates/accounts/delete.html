@@ -1,0 +1,30 @@
+{% extends 'accounts/main.html' %}
+
+{% load static %}
+
+
+
+
+
+
+
+{% block content %}
+<div class="container">
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+
+            <p>Are you sure you want to delete "{{item}}"?</p>  <!--! we are delelting the item we need to pull item from view-->
+            <form action="{% url 'delete_order' item.id %}" method="POST">
+
+                {% csrf_token %}
+
+                <a class="btn btn-small btn-primary" href="{% url 'home' %}"> Cancel</a>
+                <input class="btn btn-small btn-danger" type="submit" name="Confirm">
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+            
+{% endblock %}
