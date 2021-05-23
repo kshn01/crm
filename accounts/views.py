@@ -72,9 +72,9 @@ def createOrder(request):
     context={'form': form}
     return render(request, 'accounts/order_form.html', context)
 
-def updateOrder(request,pk_test):
+def updateOrder(request,pk):
     
-    order = Order.objects.get(id = pk_test)  #*getting the instance 
+    order = Order.objects.get(id = pk)  #*getting the instance 
     form = OrderForm(instance=order)
 
     if request.method == 'POST':
