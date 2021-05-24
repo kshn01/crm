@@ -1,0 +1,185 @@
+<!-- default django default form  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+body {
+	background-color: #63738a;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	height: 100vh;
+}
+.center {
+	width: 100%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	/* (x, y)  => position */
+	-ms-transform: translate(-50%, -50%);
+	/* IE 9 */
+	-webkit-transform: translate(-50%, -50%);
+	/* Chrome, Safari, Opera */
+}
+table {
+	width: 50%;
+	margin: 0 auto;
+	padding: 2%;
+
+	border-radius: 4px;
+	background-color: #f2f3f7;
+	min-width: 300px;
+	max-width: 420px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	border: 1px solid #58677B;
+}
+input[type=text], [type=email], [type=password], [type=submit] {
+	width: 100%;
+	height: 40px;
+	padding: 12px;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	outline: none;
+	font-size: 14px;
+	color: #4fa64e;
+}
+
+input:hover {
+	border-color: #4fa64e;
+}
+input[type=submit] {
+	background-color: #53ac53;
+	background: linear-gradient(to bottom, #58b358 0%, #449944 100%);
+	color: #ffffff;
+	font-weight: 600;
+	border: none;
+}
+input[type=submit]:hover {
+	cursor: pointer;
+}
+::placeholder {
+	color: #969fa4;
+}
+p {
+	text-align: center;
+	font-size: 14px;
+	color: #969fa4;
+	margin: 12px 0;
+}
+
+.terms>label {
+	font-size: 14px;
+	color: #969fa4;
+	margin-left: 6px;
+}
+div {
+	margin: 10px 0;
+}
+
+footer {
+	margin-top: 16px;
+}
+footer>p {
+	color: #ffffff;
+}
+footer>p>a {
+	color: #ffffff;
+	text-decoration: underline;
+}
+.dash {
+
+	min-height: 2px;
+	height: 2px;
+	max-height: 2px;
+	width: 100%;
+	background-color: #D4D4D4;
+}
+h1 {
+	text-align: center;
+	font-weight: 500;
+	color: #636363;
+	text-align: 31px;
+}
+
+    </style>
+</head>
+<body>
+    <body>
+        <div class="center">
+            <form action="" method="POST">
+
+                {% csrf_token %}
+            <table>
+                <tr>
+                   
+                    <td style="padding: 0 6px;">
+                        <h1>User Login-in</h1>
+                    </td>
+                </tr>
+              
+            
+                
+                <tr>
+                    <td colspan="3">
+                        <div>
+                            <label for="username">Username</label>
+                            <input type="text" name='username' required>
+                        </div>
+                    </td>
+                </tr>
+              
+                <tr>
+                    <td colspan="3">
+                        <div>
+                            <label for="password">Password</label>
+                            <input type="password" name="password" required>
+                        </div>
+                    </td>
+                </tr>
+                
+             
+                    <td colspan="3">
+                      
+                            <input type="submit" name="Create_User" value="Login">
+                        </div>
+                    </td>
+                </tr>
+
+            </tr>
+                
+             
+            <td colspan="3">
+                <div>
+                   {%for message in messages %}
+                        <p style=" font-weight: bold ; color: black  !important; ">{{message}}</p> 
+                   {%endfor%}
+                </div>
+            </td>
+        </tr>
+
+
+            </table>
+            <footer>
+                <p>Don't have any account? <a href="{% url 'register' %}">Create new account</a></p>
+            </footer>
+        </form>
+        </div>
+    </body>
+</body>
+</html>
+
+
+
+
+
+
+
