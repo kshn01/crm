@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'accounts', # kshnchanged #this to make site see it has an app
+    'django_filters',
 ]
 
 MIDDLEWARE = [

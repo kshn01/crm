@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import OrderForm
 from django.forms import formsets, inlineformset_factory
+from .filters import OrderFilter
 
 # Create your views here.
 
@@ -42,17 +43,36 @@ def products(request):
     products = Product.objects.all()
     return render(request,'accounts/products.html', {'products': products}) #passing the html page and the products list
 
+
+
+
+
 def customer(request, pk_test):
     customer = Customer.objects.get(id=pk_test)
     orders = customer.order_set.all()
     orders_count = orders.count()
 
+
+    #--- Similar to modelForm
+    if request.method == 'GET':
+        myFilter = OrderFilter(request.GET, queryset=orders)
+        orders = myFilter.qs
+
+    #---    
+
+
     context = {
         'customer' : customer,
         'orders' : orders,
         'orders_count' : orders_count,
+        'myFilter':myFilter,
     }
     return render(request,'accounts/customer.html',context)
+
+
+
+
+
 
 
 def createOrder(request,pk):
