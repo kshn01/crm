@@ -16,6 +16,9 @@ from django.contrib.auth.forms import UserCreationForm
 # --- for messages
 from django.contrib import messages
 from django.contrib.auth import authenticate,login, logout
+from django.contrib.auth.decorators import login_required
+
+from .decorators import allowed_users, unauthenticated_user
 
 
 # Create your views here.
@@ -25,10 +28,10 @@ from .models import *
 
 
 # ---- Rehistration page
-
+@unauthenticated_user
 def registerPage(request):
+      
     form = CreateUserForm()
-
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
@@ -45,8 +48,9 @@ def registerPage(request):
 
 # --------------
 
+@unauthenticated_user
 def loginPage(request):
-
+    
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -76,6 +80,8 @@ def logoutUser(request):
 # ---------------------
 
 
+@login_required(login_url='login')       #!login-required
+@allowed_users(allowed_roles=['admin'])  #! only-allowed users 
 def home(request):
     orders = Order.objects.all()
     customers = Customer.objects.all()
@@ -100,6 +106,21 @@ def home(request):
 
     return render(request,'accounts/dashboard.html', context)
 
+
+#* ----------- USER - Page
+
+def userPage(request):
+
+    return render(request,'accounts/user.html')
+
+# ---------------
+
+
+
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def products(request):
     products = Product.objects.all()
     return render(request,'accounts/products.html', {'products': products}) #passing the html page and the products list
@@ -107,7 +128,8 @@ def products(request):
 
 
 
-
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def customer(request, pk_test):
     customer = Customer.objects.get(id=pk_test)
     orders = customer.order_set.all()
@@ -132,10 +154,11 @@ def customer(request, pk_test):
 
 
 
+# --------------------------------------------------------------------------------------
 
 
-
-
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def createOrder(request,pk):
 
     # -- 
@@ -163,6 +186,11 @@ def createOrder(request,pk):
     context={'formset': formset}
     return render(request, 'accounts/order_form.html', context)
 
+
+# -------------------------------------------------------------------------
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def updateOrder(request,pk):
     
     order = Order.objects.get(id = pk)  #*getting the instance 
@@ -181,8 +209,11 @@ def updateOrder(request,pk):
     context = {'form' : form}
     return render(request, 'accounts/order_form.html',context)
 
+#--------------------------------------------------------------------------------
 
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def deleteOrder(request, pk):
     order = Order.objects.get(id = pk)  #*getting the instance 
     

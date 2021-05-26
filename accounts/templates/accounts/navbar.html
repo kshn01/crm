@@ -6,6 +6,9 @@
       </button>
 
 
+
+
+
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
@@ -17,8 +20,30 @@
           <!-- <li class="nav-item">
             <a class="nav-link" href="#">Customer</a>
           </li> -->
-          
+        </ul>
+
+          <p class="nav navbar-text " style = "margin-right: 10px ;">Hello, {{request.user}}</p>
+          <a class="btn btn-outline-danger" href="{% url 'logout' %}">Logout</a>
+        
+        <!-- <ul class="navbar-nav">
+          <li class="nav-item nav-link">
+            Hello, {{request.user}}
+          </li>
+       <li class="nav-item">
+        <a class="nav-link " href="{% url 'logout' %}">Logout</a>
+       </li> 
+        </ul> -->
+         
+         
+          </div>
+         
       
-      </div>
-    </div>
+     
+    <!-- <div class="navbar-nav">
+        <span style="width:auto; margin-right:10px;" ></span>
+        <span style="margin-right: 20px;"></span>
+    </div> -->
+
+     
+   
   </nav>
