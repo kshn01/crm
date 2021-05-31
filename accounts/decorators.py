@@ -9,6 +9,8 @@ from django.shortcuts import redirect
 # ----- 
 
 
+# as name tells it is decorated upon the main function in view
+
 def unauthenticated_user(view_func):
     def wrapper_func(request, *args, **kwargs):
         if request.user.is_authenticated:
@@ -25,6 +27,7 @@ def allowed_users(allowed_roles=[]):
             group = None
             if request.user.groups.exists():
                 group = request.user.groups.all()[0].name
+
             if group in allowed_roles:
                 return view_func(request, *args, **kwargs)
             else:
