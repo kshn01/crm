@@ -1,38 +1,23 @@
-{% extends 'accounts/main.html' %}
-
-{% load static %}
-
-
-
-
-
-
-
-{% block content %}
+{% extends 'accounts/main.html' %} {% load static %} {% block content %}
 
 <div class="row">
 	<div class="col-md">
 		<div class="card card-body">
+			<form action="" method="POST">
+				<!-- this part is very important -->
 
-<form action="" method="POST">
+				{% csrf_token %}
+				<!--for secure post-->
 
-<!-- this part is very important -->
+				{{ form.management_form }} {% for i in form %} {{i}}
+				<hr />
 
-    {% csrf_token %}  <!--for secure post-->
-    
-    {{ formset.management_form }}
-    {% for i in formset %}
-    {{i}}
-    <hr>
+				{% endfor %}
 
-
-    {% endfor %}
-
-    <input type="submit" name="submit" >
-
-</form>
-</div>
-</div>
+				<input type="submit" name="submit" />
+			</form>
+		</div>
+	</div>
 </div>
 
 {% endblock %}
